@@ -4,7 +4,4 @@
 /build
 /app/build
 .gradle
-/local.properties
-/.idea
-*.log
-*.apk
+.idea
