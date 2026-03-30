@@ -37,6 +37,15 @@ fun WorkerRegistrationScreen(navController: NavController) {
     var isAadhaarOtpVerified by remember { mutableStateOf(false) }
     var aadhaarOtp by remember { mutableStateOf("") }
 
+    var fullNameError by remember { mutableStateOf(false) }
+    var cityError by remember { mutableStateOf(false) }
+    var phoneNumberError by remember { mutableStateOf(false) }
+    var phoneOtpError by remember { mutableStateOf(false) }
+    var aadhaarError by remember { mutableStateOf(false) }
+    var aadhaarOtpError by remember { mutableStateOf(false) }
+    var servicesError by remember { mutableStateOf(false) }
+    var showGenericError by remember { mutableStateOf(false) }
+
     var selectedServices by remember { mutableStateOf(setOf<String>()) }
     var expandedLanguage by remember { mutableStateOf(false) }
     var selectedLanguage by remember { mutableStateOf("English") }
@@ -56,8 +65,16 @@ fun WorkerRegistrationScreen(navController: NavController) {
             fontSize = 28.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.primary,
-            modifier = Modifier.padding(bottom = 24.dp, top = 24.dp)
+            modifier = Modifier.padding(bottom = 16.dp, top = 24.dp)
         )
+        
+        if (showGenericError) {
+            Text(
+                text = "Please enter all fields and verify OTPs",
+                color = MaterialTheme.colorScheme.error,
+                modifier = Modifier.padding(bottom = 16.dp)
+            )
+        }
 
         // Language Selection
         ExposedDropdownMenuBox(
@@ -96,6 +113,7 @@ fun WorkerRegistrationScreen(navController: NavController) {
             onValueChange = { fullName = it },
             label = { Text(stringResource(R.string.full_name)) },
             shape = RoundedCornerShape(12.dp),
+            isError = fullNameError,
             modifier = Modifier.fillMaxWidth()
         )
         Spacer(modifier = Modifier.height(16.dp))
@@ -105,6 +123,7 @@ fun WorkerRegistrationScreen(navController: NavController) {
             onValueChange = { city = it },
             label = { Text(stringResource(R.string.city)) },
             shape = RoundedCornerShape(12.dp),
+            isError = cityError,
             modifier = Modifier.fillMaxWidth()
         )
         Spacer(modifier = Modifier.height(16.dp))
@@ -120,6 +139,7 @@ fun WorkerRegistrationScreen(navController: NavController) {
             label = { Text(stringResource(R.string.phone_number)) },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
             shape = RoundedCornerShape(12.dp),
+            isError = phoneNumberError,
             modifier = Modifier.fillMaxWidth()
         )
         if (!isPhoneOtpVerified) {
@@ -131,15 +151,34 @@ fun WorkerRegistrationScreen(navController: NavController) {
                     label = { Text(stringResource(R.string.enter_phone_otp)) },
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                     shape = RoundedCornerShape(12.dp),
+                    isError = phoneOtpError,
                     modifier = Modifier.fillMaxWidth()
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                Button(onClick = { isPhoneOtpVerified = true }, shape = RoundedCornerShape(12.dp), modifier = Modifier.fillMaxWidth().height(52.dp)) {
+                Button(onClick = { 
+                    if (phoneOtp.isBlank()) {
+                        phoneOtpError = true
+                        showGenericError = true
+                    } else {
+                        phoneOtpError = false
+                        showGenericError = false
+                        isPhoneOtpVerified = true 
+                    }
+                }, shape = RoundedCornerShape(12.dp), modifier = Modifier.fillMaxWidth().height(52.dp)) {
                     Text(stringResource(R.string.verify_phone_otp))
                 }
             } else {
                 Spacer(modifier = Modifier.height(8.dp))
-                Button(onClick = { isPhoneOtpSent = true }, shape = RoundedCornerShape(12.dp), modifier = Modifier.fillMaxWidth().height(52.dp)) {
+                Button(onClick = { 
+                    if (phoneNumber.isBlank()) {
+                        phoneNumberError = true
+                        showGenericError = true
+                    } else {
+                        phoneNumberError = false
+                        showGenericError = false
+                        isPhoneOtpSent = true 
+                    }
+                }, shape = RoundedCornerShape(12.dp), modifier = Modifier.fillMaxWidth().height(52.dp)) {
                     Text(stringResource(R.string.send_phone_otp))
                 }
             }
@@ -154,6 +193,7 @@ fun WorkerRegistrationScreen(navController: NavController) {
             onValueChange = { aadhaar = it },
             label = { Text(stringResource(R.string.aadhaar_or_pan_card)) },
             shape = RoundedCornerShape(12.dp),
+            isError = aadhaarError,
             modifier = Modifier.fillMaxWidth()
         )
         if (!isAadhaarOtpVerified) {
@@ -165,15 +205,34 @@ fun WorkerRegistrationScreen(navController: NavController) {
                     label = { Text(stringResource(R.string.enter_id_otp)) },
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                     shape = RoundedCornerShape(12.dp),
+                    isError = aadhaarOtpError,
                     modifier = Modifier.fillMaxWidth()
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                Button(onClick = { isAadhaarOtpVerified = true }, shape = RoundedCornerShape(12.dp), modifier = Modifier.fillMaxWidth().height(52.dp)) {
+                Button(onClick = { 
+                    if (aadhaarOtp.isBlank()) {
+                        aadhaarOtpError = true
+                        showGenericError = true
+                    } else {
+                        aadhaarOtpError = false
+                        showGenericError = false
+                        isAadhaarOtpVerified = true 
+                    }
+                }, shape = RoundedCornerShape(12.dp), modifier = Modifier.fillMaxWidth().height(52.dp)) {
                     Text(stringResource(R.string.verify_id_otp))
                 }
             } else {
                 Spacer(modifier = Modifier.height(8.dp))
-                Button(onClick = { isAadhaarOtpSent = true }, shape = RoundedCornerShape(12.dp), modifier = Modifier.fillMaxWidth().height(52.dp)) {
+                Button(onClick = { 
+                    if (aadhaar.isBlank()) {
+                        aadhaarError = true
+                        showGenericError = true
+                    } else {
+                        aadhaarError = false
+                        showGenericError = false
+                        isAadhaarOtpSent = true 
+                    }
+                }, shape = RoundedCornerShape(12.dp), modifier = Modifier.fillMaxWidth().height(52.dp)) {
                     Text(stringResource(R.string.send_id_otp))
                 }
             }
@@ -183,7 +242,12 @@ fun WorkerRegistrationScreen(navController: NavController) {
         Spacer(modifier = Modifier.height(16.dp))
 
         // Service Selection (Multiple)
-        Text("Select Services (One or more)", fontWeight = FontWeight.SemiBold, modifier = Modifier.align(Alignment.Start))
+        Text(
+            text = "Select Services (One or more)", 
+            fontWeight = FontWeight.SemiBold, 
+            color = if (servicesError) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurface,
+            modifier = Modifier.align(Alignment.Start)
+        )
         Spacer(modifier = Modifier.height(8.dp))
         
         Card(
@@ -220,9 +284,23 @@ fun WorkerRegistrationScreen(navController: NavController) {
 
         Button(
             onClick = {
-                // Submit logic, then redirect to login because user wants Worker to login after registration
-                navController.navigate(Screen.Login.route) {
-                    popUpTo(0) // Clear backstack so the user goes fresh to Login
+                fullNameError = fullName.isBlank()
+                cityError = city.isBlank()
+                phoneNumberError = phoneNumber.isBlank()
+                aadhaarError = aadhaar.isBlank()
+                phoneOtpError = phoneOtp.isBlank() && isPhoneOtpSent && !isPhoneOtpVerified
+                aadhaarOtpError = aadhaarOtp.isBlank() && isAadhaarOtpSent && !isAadhaarOtpVerified
+                servicesError = selectedServices.isEmpty()
+
+                val hasError = fullNameError || cityError || phoneNumberError || aadhaarError || phoneOtpError || aadhaarOtpError || servicesError || (!isPhoneOtpVerified) || (!isAadhaarOtpVerified)
+
+                if (hasError) {
+                    showGenericError = true
+                } else {
+                    showGenericError = false
+                    navController.navigate(Screen.Login.route) {
+                        popUpTo(0)
+                    }
                 }
             },
             modifier = Modifier.fillMaxWidth().height(52.dp),
