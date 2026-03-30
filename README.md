@@ -2,7 +2,7 @@
 
 QuickServe is a modern, premium on-demand service mobile application built with Jetpack Compose. It connects clients with skilled workers (Electricians, Plumbers, Carpenters, etc.) for various household and professional tasks.
 
-## 🚀 Features
+## Features
 
 - **Multi-Role Support**: Separate flows for **Clients** and **Workers**.
 - **Modern UI/UX**: Clean, premium design with a Deep Purple and Teal color palette, soft shadows, and rounded corners.
@@ -18,7 +18,7 @@ QuickServe is a modern, premium on-demand service mobile application built with 
   - Personal dashboard to track completed/pending jobs and earnings.
   - Receive notifications for new tasks nearby.
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Language**: Kotlin
 - **UI Framework**: Jetpack Compose (Material 3)
@@ -26,7 +26,7 @@ QuickServe is a modern, premium on-demand service mobile application built with 
 - **Image Loading**: Coil
 - **Architecture**: Modern Android Architecture patterns
 
-## 📥 Getting Started
+## Getting Started
 
 Follow these instructions to get a copy of the project up and running on your local machine for development and testing purposes.
 
@@ -53,7 +53,7 @@ Follow these instructions to get a copy of the project up and running on your lo
    - Wait for Android Studio to finish indexing and syncing Gradle files.
    - If prompted, install any missing SDK components or build tools.
 
-## 🏃 Running the App
+## Running the App
 
 1. **Setup an Emulator or Physical Device**:
    - Go to `Device Manager` in Android Studio.
@@ -65,19 +65,19 @@ Follow these instructions to get a copy of the project up and running on your lo
    - Choose your target device.
    - Click the **Run** icon (green play button) or press `Shift + F10`.
 
-## 📂 Project Structure
+## Project Structure
 
 - `app/src/main/java/com/quickserve/app/ui/screens/` - Contains all Compose screens (Auth, Client, Worker).
 - `app/src/main/java/com/quickserve/app/ui/theme/` - Color, Typography, and Theme definitions.
 - `app/src/main/java/com/quickserve/app/ui/navigation/` - Navigation graph and route definitions.
 - `app/src/main/java/com/quickserve/app/utils/` - Utility classes for Language, Validation, etc.
 
-## 🧪 Testing
+## Testing
 
 - To run unit tests: `./gradlew test`
 - To run instrumented tests: `./gradlew connectedAndroidTest`
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
